@@ -1,5 +1,7 @@
+package javaproblems.datastructures;
+
 import java.util.*;
-public class MainClass {
+public class SumOfList {
 
     private static final Scanner scanner = new Scanner(System.in);
 
