@@ -14,64 +14,49 @@ public class BinarySearchTree {
 
         tree.getRoot().getLeft().setLeft(new Node("dates"));
 
+        preOrderWithStack(tree);
+
+
+    }
+
+    public static void preOrderWithStack(Tree tree) {
         List<Node> visitOrder = new ArrayList<>();
         Stack<Node> stack = new Stack<>();
 
         Node node = tree.getRoot();
         stack.push(node);
 
-        System.out.format("visitOrder = %s\nStack=%s ",visitOrder.toString(),stack.toString());
+        node = stack.peek();
 
         visitOrder.add(node);
+        int count = 0;
+        int loopLimit = 7;
 
-        System.out.format("visitOrder = %s\nStack=%s \n",visitOrder.toString(),stack.toString());
+        while (node != null && count < loopLimit) {
+            count++;
+            System.out.format("loop count: %d\ncurrent node: {%s}\nstack:{%s}\n", count, node, stack);
+            System.out.println();
+            System.out.println();
 
-        System.out.format("%s has a left child ? %b\n\n",node, node.hasLeftChild());
-
-        if (node.hasLeftChild()) {
-            node = node.getLeft();
-            stack.push(node);
+            if (node.hasLeftChild()) {
+                node = node.getLeft();
+                stack.push(node);
+                node = stack.peek();
+                visitOrder.add(node);
+            } else if (node.hasRightChild()) {
+                node = node.getRight();
+                stack.push(node);
+                node = stack.peek();
+                visitOrder.add(node);
+            } else {
+                stack.pop();
+                if(!stack.isEmpty()){
+                    node = stack.peek();
+                }else{
+                    node = null;
+                }
+            }
         }
-
-        System.out.format("visitOrder = %s\nStack=%s \n\n",visitOrder.toString(),stack.toString());
-
-        System.out.format("visit %s \n\n",node);
-
-        visitOrder.add(node);
-
-        System.out.format("visitOrder = %s\nStack=%s \n\n",visitOrder.toString(),stack.toString());
-
-        System.out.format("%s has a left child ? %b\n\n",node, node.hasLeftChild());
-
-        if (node.hasLeftChild()) {
-            node = node.getLeft();
-            stack.push(node);
-        }
-
-        System.out.format("visitOrder = %s\nStack=%s \n\n",visitOrder.toString(),stack.toString());
-
-        System.out.format("visit %s \n\n",node);
-
-        visitOrder.add(node);
-
-        System.out.format("visitOrder = %s\nStack=%s \n\n",visitOrder.toString(),stack.toString());
-
-        System.out.format("%s has a left child ? %b\n\n",node, node.hasLeftChild());
-
-        if (node.hasLeftChild()) {
-            node = node.getLeft();
-            stack.push(node);
-        }else{
-            node = stack.pop();
-        }
-
-        if (node.hasRightChild()){
-            node = node.right;
-        }
-
-
-
-
 
     }
 }
