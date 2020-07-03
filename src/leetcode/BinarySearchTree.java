@@ -8,42 +8,98 @@ public class BinarySearchTree {
 
     public static void main(String[] args) {
 
-        Node node0 = new Node(1);
-        Node node1 = new Node(2);
-        Node node2 = new Node(3);
+        Tree tree = new Tree("Apple");
+        tree.getRoot().setLeft(new Node("Banana"));
+        tree.getRoot().setRight(new Node("Cheery"));
 
-        node0.setLeft(node1);
-        node0.setRight(node2);
+        tree.getRoot().getLeft().setLeft(new Node("dates"));
 
-        System.out.format("node0 value =%d\n",node0.value);
-        System.out.format("node0 left value =%d\n",node0.left.value);
-        System.out.format("node0 right value =%d\n",node0.right.value);
-        System.out.format("node0 has left? %b\n",node0.hasLeftChild());
-        System.out.format("node0 has right? %b\n",node0.hasRightChild());
+        List<Node> visitOrder = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+
+        Node node = tree.getRoot();
+        stack.push(node);
+
+        System.out.format("visitOrder = %s\nStack=%s ",visitOrder.toString(),stack.toString());
+
+        visitOrder.add(node);
+
+        System.out.format("visitOrder = %s\nStack=%s \n",visitOrder.toString(),stack.toString());
+
+        System.out.format("%s has a left child ? %b\n\n",node, node.hasLeftChild());
+
+        if (node.hasLeftChild()) {
+            node = node.getLeft();
+            stack.push(node);
+        }
+
+        System.out.format("visitOrder = %s\nStack=%s \n\n",visitOrder.toString(),stack.toString());
+
+        System.out.format("visit %s \n\n",node);
+
+        visitOrder.add(node);
+
+        System.out.format("visitOrder = %s\nStack=%s \n\n",visitOrder.toString(),stack.toString());
+
+        System.out.format("%s has a left child ? %b\n\n",node, node.hasLeftChild());
+
+        if (node.hasLeftChild()) {
+            node = node.getLeft();
+            stack.push(node);
+        }
+
+        System.out.format("visitOrder = %s\nStack=%s \n\n",visitOrder.toString(),stack.toString());
+
+        System.out.format("visit %s \n\n",node);
+
+        visitOrder.add(node);
+
+        System.out.format("visitOrder = %s\nStack=%s \n\n",visitOrder.toString(),stack.toString());
+
+        System.out.format("%s has a left child ? %b\n\n",node, node.hasLeftChild());
+
+        if (node.hasLeftChild()) {
+            node = node.getLeft();
+            stack.push(node);
+        }else{
+            node = stack.pop();
+        }
+
+        if (node.hasRightChild()){
+            node = node.right;
+        }
+
+
+
+
 
     }
 }
 
 class Node {
-    int value;
+    String value;
     Node left;
     Node right;
 
-    public Node(int value) {
+    public Node(String value) {
         this.value = value;
     }
 
-    public Node(int value, Node left, Node right) {
+    public Node(String value, Node left, Node right) {
         this.value = value;
         this.left = left;
         this.right = right;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public Node getRight() {
+        return right;
+    }
+
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -67,19 +123,24 @@ class Node {
         return right != null;
     }
 
+    @Override
+    public String toString() {
+        return "Node(" + value + ")";
+    }
 }
 
 
-class Tree{
+class Tree {
     Node root;
 
-    public  Tree(){ }
+    public Tree() {
+    }
 
-    public Tree(int value){
+    public Tree(String value) {
         this.root = new Node(value);
     }
 
-    public Node getRoot(){
+    public Node getRoot() {
         return root;
     }
 }
