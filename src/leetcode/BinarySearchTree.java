@@ -13,6 +13,7 @@ public class BinarySearchTree {
         tree.getRoot().setRight(new Node("Cheery"));
 
         tree.getRoot().getLeft().setLeft(new Node("dates"));
+        tree.getRoot().getLeft().getLeft().setLeft(new Node("Cheery"));
 
         preOrderWithStack(tree);
 
@@ -30,29 +31,29 @@ public class BinarySearchTree {
 
         visitOrder.add(node);
         int count = 0;
-        int loopLimit = 7;
+        int loopLimit = 9;
 
         while (node != null && count < loopLimit) {
             count++;
-            System.out.format("loop count: %d\ncurrent node: {%s}\nstack:{%s}\n", count, node, stack);
+            System.out.format("loop count: %d\ncurrent node: %s\nstack:%s\nvisit order: %s\n", count, node, stack, visitOrder);
             System.out.println();
             System.out.println();
 
-            if (node.hasLeftChild()) {
+            if (node.hasLeftChild() && !visitOrder.contains(node.left)) { // Beaware that this will skip duplicate nodes in the BST
                 node = node.getLeft();
                 stack.push(node);
                 node = stack.peek();
                 visitOrder.add(node);
-            } else if (node.hasRightChild()) {
+            } else if (node.hasRightChild() && !visitOrder.contains(node.right)) {
                 node = node.getRight();
                 stack.push(node);
                 node = stack.peek();
                 visitOrder.add(node);
             } else {
                 stack.pop();
-                if(!stack.isEmpty()){
+                if (!stack.isEmpty()) {
                     node = stack.peek();
-                }else{
+                } else {
                     node = null;
                 }
             }
