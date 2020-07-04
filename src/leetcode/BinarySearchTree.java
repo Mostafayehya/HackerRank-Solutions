@@ -13,28 +13,62 @@ public class BinarySearchTree {
         tree.getRoot().setRight(new Node("Cheery"));
 
         tree.getRoot().getLeft().setLeft(new Node("dates"));
-        tree.getRoot().getLeft().getLeft().setLeft(new Node("Orange"));
 
         //preOrderWithStack(tree);
-
-        List<Node> visitOrder = new ArrayList<>();
-        Stack<Node> stack = new Stack<>();
         Node node = tree.getRoot();
 
-        preOrderTraversalWithRecursion(node,visitOrder);
+        // Pre-Order Traversal
+        List<Node> visitOrder = new ArrayList<>();
+        preOrderTraversalWithRecursion(node, visitOrder);
+        System.out.println("Pre-Order traversal: " + visitOrder);
 
-        System.out.println(visitOrder);
+        // In-Order Traversal
+        visitOrder = new ArrayList<>();
+        inOrderTraversalWithRecursion(node, visitOrder);
+        System.out.println("In-Order traversal: " + visitOrder);
+
+        // Post-Order Traversal
+        visitOrder = new ArrayList<>();
+        postOrderTraversalWithRecursion(node, visitOrder);
+        System.out.println("Post-Order traversal: " + visitOrder);
+
 
     }
 
-    public static void preOrderTraversalWithRecursion(Node node,List<Node> visited) {
+    public static void preOrderTraversalWithRecursion(Node node, List<Node> visited) {
 
         visited.add(node);
         if (node.hasLeftChild() && !node.visitedLeft)
-            preOrderTraversalWithRecursion(node.left,visited);
+            preOrderTraversalWithRecursion(node.left, visited);
 
         if (node.hasRightChild() && !node.visitedRight)
-            preOrderTraversalWithRecursion(node.right,visited);
+            preOrderTraversalWithRecursion(node.right, visited);
+
+
+    }
+
+    public static void inOrderTraversalWithRecursion(Node node, List<Node> visited) {
+
+        if (node.hasLeftChild() && !node.visitedLeft)
+            inOrderTraversalWithRecursion(node.left, visited);
+
+        visited.add(node);
+
+
+        if (node.hasRightChild() && !node.visitedRight)
+            inOrderTraversalWithRecursion(node.right, visited);
+
+    }
+
+    public static void postOrderTraversalWithRecursion(Node node, List<Node> visited) {
+
+        if (node.hasLeftChild() && !node.visitedLeft)
+            postOrderTraversalWithRecursion(node.left, visited);
+
+        if (node.hasRightChild() && !node.visitedRight)
+            postOrderTraversalWithRecursion(node.right, visited);
+
+        visited.add(node);
 
 
     }
