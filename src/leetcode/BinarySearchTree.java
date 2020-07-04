@@ -39,12 +39,15 @@ public class BinarySearchTree {
             System.out.println();
             System.out.println();
 
-            if (node.hasLeftChild() && !visitOrder.contains(node.left)) { // Beaware that this will skip duplicate nodes in the BST
+            if (node.hasLeftChild() && !node.visitedLeft) { // Beaware that this will skip duplicate nodes in the BST
+                node.visitedLeft = true;
                 node = node.getLeft();
                 stack.push(node);
                 node = stack.peek();
+
                 visitOrder.add(node);
-            } else if (node.hasRightChild() && !visitOrder.contains(node.right)) {
+            } else if (node.hasRightChild() && !node.visitedRight) {
+                node.visitedRight = true;
                 node = node.getRight();
                 stack.push(node);
                 node = stack.peek();
@@ -66,6 +69,25 @@ class Node {
     String value;
     Node left;
     Node right;
+
+    boolean visitedLeft;
+    boolean visitedRight;
+
+    public boolean isVisitedLeft() {
+        return visitedLeft;
+    }
+
+    public void setVisitedLeft(boolean visitedLeft) {
+        this.visitedLeft = visitedLeft;
+    }
+
+    public boolean isVisitedRight() {
+        return visitedRight;
+    }
+
+    public void setVisitedRight(boolean visitedRight) {
+        this.visitedRight = visitedRight;
+    }
 
     public Node(String value) {
         this.value = value;
