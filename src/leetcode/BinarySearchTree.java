@@ -13,12 +13,32 @@ public class BinarySearchTree {
         tree.getRoot().setRight(new Node("Cheery"));
 
         tree.getRoot().getLeft().setLeft(new Node("dates"));
-        tree.getRoot().getLeft().getLeft().setLeft(new Node("Cheery"));
+        tree.getRoot().getLeft().getLeft().setLeft(new Node("Orange"));
 
-        preOrderWithStack(tree);
+        //preOrderWithStack(tree);
+
+        List<Node> visitOrder = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        Node node = tree.getRoot();
+
+        preOrderTraversalWithRecursion(node,visitOrder);
+
+        System.out.println(visitOrder);
+
+    }
+
+    public static void preOrderTraversalWithRecursion(Node node,List<Node> visited) {
+
+        visited.add(node);
+        if (node.hasLeftChild() && !node.visitedLeft)
+            preOrderTraversalWithRecursion(node.left,visited);
+
+        if (node.hasRightChild() && !node.visitedRight)
+            preOrderTraversalWithRecursion(node.right,visited);
 
 
     }
+
 
     public static void preOrderWithStack(Tree tree) {
         List<Node> visitOrder = new ArrayList<>();
