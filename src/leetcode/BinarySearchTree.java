@@ -3,6 +3,93 @@ package leetcode;
 import java.io.*;
 import java.util.*;
 
+class Node {
+    String value;
+    Node left;
+    Node right;
+
+    boolean visitedLeft;
+    boolean visitedRight;
+
+    public boolean isVisitedLeft() {
+        return visitedLeft;
+    }
+
+    public void setVisitedLeft(boolean visitedLeft) {
+        this.visitedLeft = visitedLeft;
+    }
+
+    public boolean isVisitedRight() {
+        return visitedRight;
+    }
+
+    public void setVisitedRight(boolean visitedRight) {
+        this.visitedRight = visitedRight;
+    }
+
+    public Node(String value) {
+        this.value = value;
+    }
+
+    public Node(String value, Node left, Node right) {
+        this.value = value;
+        this.left = left;
+        this.right = right;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public Node getRight() {
+        return right;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public void setLeft(Node left) {
+        this.left = left;
+    }
+
+    public void setRight(Node right) {
+        this.right = right;
+    }
+
+    public Node getLeft() {
+        return left;
+    }
+
+    public boolean hasLeftChild() {
+        return left != null;
+    }
+
+    public boolean hasRightChild() {
+        return right != null;
+    }
+
+    @Override
+    public String toString() {
+        return "Node(" + value + ")";
+    }
+}
+
+class Tree {
+    Node root;
+
+    public Tree() {
+    }
+
+    public Tree(String value) {
+        this.root = new Node(value);
+    }
+
+    public Node getRoot() {
+        return root;
+    }
+}
+
 public class BinarySearchTree {
     public static Scanner scanner = new Scanner(System.in);
 
@@ -119,90 +206,3 @@ public class BinarySearchTree {
     }
 }
 
-class Node {
-    String value;
-    Node left;
-    Node right;
-
-    boolean visitedLeft;
-    boolean visitedRight;
-
-    public boolean isVisitedLeft() {
-        return visitedLeft;
-    }
-
-    public void setVisitedLeft(boolean visitedLeft) {
-        this.visitedLeft = visitedLeft;
-    }
-
-    public boolean isVisitedRight() {
-        return visitedRight;
-    }
-
-    public void setVisitedRight(boolean visitedRight) {
-        this.visitedRight = visitedRight;
-    }
-
-    public Node(String value) {
-        this.value = value;
-    }
-
-    public Node(String value, Node left, Node right) {
-        this.value = value;
-        this.left = left;
-        this.right = right;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public Node getRight() {
-        return right;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public void setLeft(Node left) {
-        this.left = left;
-    }
-
-    public void setRight(Node right) {
-        this.right = right;
-    }
-
-    public Node getLeft() {
-        return left;
-    }
-
-    public boolean hasLeftChild() {
-        return left != null;
-    }
-
-    public boolean hasRightChild() {
-        return right != null;
-    }
-
-    @Override
-    public String toString() {
-        return "Node(" + value + ")";
-    }
-}
-
-
-class Tree {
-    Node root;
-
-    public Tree() {
-    }
-
-    public Tree(String value) {
-        this.root = new Node(value);
-    }
-
-    public Node getRoot() {
-        return root;
-    }
-}
