@@ -1,4 +1,4 @@
-package javaproblems.datastructures;
+package problemsolving.algorithms;
 
 import java.io.*;
 import java.math.*;
